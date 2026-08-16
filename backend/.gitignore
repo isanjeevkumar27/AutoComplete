@@ -1,0 +1,10 @@
+node_modules
+
+Crow-master
+include
+asio-1.36.0
+
+libmysql.dll
+.env
+
+package-lock.json
