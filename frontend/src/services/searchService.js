@@ -1,9 +1,11 @@
+const API_URL = import.meta.env.VITE_API_URL;
+
 export const autocomplete = async (query) => {
 
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-        `http://localhost:3000/search?q=${query}`,
+        `${API_URL}/search?q=${encodeURIComponent(query)}`,
         {
             method: "GET",
             headers: {
@@ -22,7 +24,7 @@ export const searchQuery = async (query) => {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-        "http://localhost:3000/search",
+        `${API_URL}/search`,
         {
             method: "POST",
             headers: {
@@ -39,12 +41,13 @@ export const searchQuery = async (query) => {
 
     return data;
 };
+
 export const acceptSuggestion = async (query) => {
 
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-        "http://localhost:3000/search/accept",
+        `${API_URL}/search/accept`,
         {
             method: "POST",
             headers: {
