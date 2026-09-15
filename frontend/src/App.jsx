@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Search from "./pages/Search";
-
+import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
 
     const [token, setToken] = useState(
@@ -16,48 +16,48 @@ function App() {
         <BrowserRouter>
             <Routes>
 
-                <Route
-                    path="/"
-                    element={
-                        token
-                            ? <Navigate to="/search" />
-                            : <Home />
-                    }
-                />
+    {/* Public Home */}
+    <Route
+        path="/"
+        element={<Home />}
+    />
 
-                <Route
-                    path="/login"
-                    element={
-                        token
-                            ? <Navigate to="/search" />
-                            : <Login setToken={setToken} />
-                    }
-                />
+    {/* Public Login */}
+    <Route
+        path="/login"
+        element={
+            token
+                ? <Navigate to="/search" />
+                : <Login setToken={setToken} />
+        }
+    />
 
-                <Route
-                    path="/register"
-                    element={
-                        token
-                            ? <Navigate to="/search" />
-                            : <Register />
-                    }
-                />
+    {/* Public Register */}
+    <Route
+        path="/register"
+        element={
+            token
+                ? <Navigate to="/search" />
+                : <Register />
+        }
+    />
 
-                <Route
-                    path="/search"
-                    element={
-                        token
-                            ? <Search setToken={setToken} />
-                            : <Navigate to="/login" />
-                    }
-                />
+    {/* Protected Search */}
+    <Route
+        path="/search"
+        element={
+            <ProtectedRoute>
+                <Search setToken={setToken} />
+            </ProtectedRoute>
+        }
+    />
 
-                <Route
-                    path="*"
-                    element={<Navigate to="/" />}
-                />
+    <Route
+        path="*"
+        element={<Navigate to="/" />}
+    />
 
-            </Routes>
+</Routes>
         </BrowserRouter>
     );
 }

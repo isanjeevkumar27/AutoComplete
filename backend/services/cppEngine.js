@@ -12,9 +12,14 @@ const cppDirectory = path.join(
     "../../cpp-engine"
 );
 
+const cppExecutable =
+    process.platform === "win32"
+        ? "trie.exe"
+        : "trie";
+
 const cppPath = path.join(
     cppDirectory,
-    "trie.exe"
+    cppExecutable
 );
 
 // Start the C++ search engine once.

@@ -26,10 +26,8 @@ const cors = require("cors");
 require("./services/cppEngine");
 
 const app = express();
-app.use(cors({
-    origin: "http://localhost:5173"
-}));
-const PORT = 3000;
+app.use(cors());
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
@@ -89,6 +87,6 @@ app.use("/search", searchRoutes);
     //    ↓
 // POSTMAN / REACT
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server running on port ${PORT}`);
 });
